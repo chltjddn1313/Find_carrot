@@ -23,6 +23,7 @@ play.addEventListener('click', ()=> {
   createGame('carrot', CARROT_COUNT, 'img/carrot.png');
   createGame('bug', BUG_COUNT, 'img/bug.png');
   playGame();
+  play.style.display = 'none';
 });
 
 replay.addEventListener('click', ()=> {
