@@ -15,6 +15,14 @@ const alert = document.querySelector('.alert');
 const replay = document.querySelector('.replay');
 const message = document.querySelector('.message');
 
+const alertSound = new Audio('./sound/alert.wav');
+const bgSound = new Audio('./sound/bg.mp3');
+const bugSound = new Audio('./sound/bug_pull.mp3');
+const carrotSound = new Audio('./sound/carrot_pull.mp3');
+const windSound = new Audio('./sound/game_win.mp3');
+
+
+
 let time_limit = TIME_LIMIT;
 let bool = true;
 count.innerHTML = CARROT_COUNT;
@@ -63,6 +71,7 @@ function randomNumber(min, max) {
 
 window.addEventListener('click', (e)=> {
   if (e.target.className == 'carrot') {
+    carrotSound.play();
     field.removeChild(e.target);
     count.innerHTML--;
     if (count.innerHTML == 0) {
@@ -75,17 +84,22 @@ window.addEventListener('click', (e)=> {
 
 function gameOver(bol) {
   alert.className = 'alert';
+  bgSound.pause();
+  bgSound.currentTime = 0;
+  alertSound.play();
   if (bol) {
     bool = false;
     message.innerHTML = 'YOU WIN!';
+    windSound.play();
   } else {
     bool = false;
     message.innerHTML = 'YOU LOSE!';
-
+    bugSound.play();
   }
 }
 
 function playGame() {
+  bgSound.play();
   time.innerHTML = time_limit;
   setTimeout(function() {
 
