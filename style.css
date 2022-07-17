@@ -25,11 +25,24 @@
   border: 4px solid;
   border-radius: 10px;
   font-size: 24px;
+}
+
+button {
   transition: transform 300ms ease-in;
 }
 
-.play:hover {
+button:hover {
   transform: scale(1.1);
+  cursor: pointer;
+}
+
+img {
+  transition: transform 300ms ease-in;
+}
+
+img:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }
 
 .time {

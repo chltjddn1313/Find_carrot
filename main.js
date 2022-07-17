@@ -1,17 +1,27 @@
 'use strict';
 
+const IMGSIZE = 80;
+const TIME_LIMIT = 10;
+const CARROT_COUNT = 5;
+const BUG_COUNT = 5;
+const PLAY = true;
+
 const play = document.querySelector('.play');
 const field = document.querySelector('.field');
 const fieldRect = field.getBoundingClientRect();
-const IMGSIZE = 80;
+const time = document.querySelector('.time');
+const count = document.querySelector('.count');
+const alert = document.querySelector('.alert');
+const message = document.querySelector('.message');
 
 play.addEventListener('click', ()=> {
-  playGame('carrot', 5, 'img/carrot.png');
-  playGame('bug', 5, 'img/bug.png');
-  console.log(fieldRect);
+  createGame('carrot', CARROT_COUNT, 'img/carrot.png');
+  createGame('bug', BUG_COUNT, 'img/bug.png');
+  playGame();
+
 });
 
-function playGame(className, count, imgPath) {
+function createGame(className, count, imgPath) {
   const xmin = 0;
   const ymin = 0;
   const xmax = fieldRect.width - IMGSIZE;
@@ -31,4 +41,28 @@ function playGame(className, count, imgPath) {
 
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
+}
+let time_limit = TIME_LIMIT;
+
+window.addEventListener('click', (e)=> {
+  if (e.target.className == 'carrot') {
+
+  } else if (e.target.className == 'bug') {
+    message.innerHTML = 'YOU LOSE!';
+    return alert.className = 'alert';
+  }
+});
+
+function playGame() {
+  time.innerHTML = time_limit;
+  count.innerHTML = CARROT_COUNT;
+  setTimeout(function() {
+
+    if(time_limit == 0) {
+      message.innerHTML = 'YOU LOSE!';
+      return alert.className = 'alert';
+    }
+    time_limit--;
+    playGame();
+  }, 1000);
 }
